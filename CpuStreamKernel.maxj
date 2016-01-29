@@ -1,0 +1,28 @@
+package cpustream;
+
+import com.maxeler.maxcompiler.v2.kernelcompiler.Kernel;
+import com.maxeler.maxcompiler.v2.kernelcompiler.KernelParameters;
+import com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEFloat;
+import com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar;
+
+class CpuStreamKernel extends Kernel {
+
+	CpuStreamKernel(KernelParameters parameters) {
+		super(parameters);
+
+		// Typedef
+		DFEFloat singleType = dfeFloat(8, 24);
+
+		// Stream Input
+		DFEVar a = io.input("a", singleType);
+
+		// Scalar Input
+		DFEVar b = io.scalarInput("b", singleType);
+
+        DFEVar sub = a - b;
+		DFEVar result = sub*sub;
+		// Stream Output
+		io.output("c", result, singleType);
+	}
+}
+
